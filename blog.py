@@ -1,6 +1,7 @@
 """ file for interacting with blog objects """
 import pygsheets
 
+
 def get_blogs():
     """ return rows object containing blogs """
     _gc = pygsheets.authorize(service_file='client_secret.json', no_cache=True)
@@ -8,7 +9,8 @@ def get_blogs():
     _rows = _wks.get_all_records('', 1)
     return _rows
 
-class Blog(object): # pylint: disable=too-few-public-methods
+
+class Blog(object):  # pylint: disable=too-few-public-methods
     """ class object for blog """
     blogid = -1
     datecreated = ""
