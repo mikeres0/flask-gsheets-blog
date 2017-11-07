@@ -39,7 +39,7 @@
                   {{ blog.content|safe if blog.contenttype == 'HTML' else blog.content  }}
               </p>
               <p class="post-meta">Posted by
-                <a href="#">{{ blog.author }}</a> on {{ blog.datecreated }}
+                <a href="{{ blog.authorsite }}" target="_blank">{{ blog.author }}</a> on {{ blog.datecreated }}
               </p>
             </div>
           </div>

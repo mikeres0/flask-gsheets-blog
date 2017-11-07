@@ -19,6 +19,7 @@ class Blog(object):  # pylint: disable=too-few-public-methods
     content = ""
     contenttype = ""
     author = ""
+    authorsite = ""
     tags = ""
 
     def __init__(self):
