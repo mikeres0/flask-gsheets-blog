@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GSHEETS + FLASK = BLOG <3">
+  <meta name="author" content="Mike Resoli">
+
+  <title>GSHEETS #⃣ + FLASK 🍼 = BLOG 😍</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 
+      <br />
+      <small> Cached: {{ cached }}</small>
+    </h1>
+
+    {% if blogs %}
+      {% for blog in blogs %}
+      <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+              <a href="#">
+                <h2 class="post-title">
+                  {{ blog.title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    {{ blog.description }}
+                </h3>
+              </a>
+              <p>
+                  {{ blog.content|safe if blog.contenttype == 'HTML' else blog.content  }}
+              </p>
+              <p class="post-meta">Posted by
+                <a href="#">{{ blog.author }}</a> on {{ blog.datecreated }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <hr>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <!-- Core JavaScript
+    ================================================== -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  {% block extrajs %}{% endblock %}
+</body>
+
+</html>
