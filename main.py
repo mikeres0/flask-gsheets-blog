@@ -1,6 +1,6 @@
 """ A blog using Google Sheets as a DB, served as a Flask application """
 from flask import Flask, render_template, redirect
-from blog import Blog, GetBlogs
+from blog import Blog, get_blogs
 from werkzeug.contrib.cache import SimpleCache
 
 APP = Flask(__name__)
@@ -17,7 +17,7 @@ def index():
 
     if blogs is None:
         cached = 'false'
-        rows = GetBlogs()
+        rows = get_blogs()
         for i in rows:
             data.append(
                 Blog(

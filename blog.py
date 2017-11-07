@@ -1,14 +1,15 @@
 """ file for interacting with blog objects """
 import pygsheets
 
-def GetBlogs():
-    gc = pygsheets.authorize(service_file='client_secret.json', no_cache=True)
-    wks = gc.open("BlogDB").sheet1
-    rows = wks.get_all_records('', 1)
+def get_blogs():
+    """ return rows object containing blogs """
+    _gc = pygsheets.authorize(service_file='client_secret.json', no_cache=True)
+    _wks = _gc.open("BlogDB").sheet1
+    _rows = _wks.get_all_records('', 1)
+    return _rows
 
-    return rows
-
-class Blog(object):
+class Blog(object): # pylint: disable=too-few-public-methods
+    """ class object for blog """
     blogid = -1
     datecreated = ""
     title = ""
@@ -18,12 +19,8 @@ class Blog(object):
     author = ""
     tags = ""
 
-    def __init__(self, blogid, datecreated, title, description, content, contenttype, author, tags):
-        self.blogid = blogid,
-        self.datecreated = datecreated,
-        self.title = title,
-        self.description = description,
-        self.content = content,
-        self.contenttype = contenttype,
-        self.author = author,
-        self.tags = tags
+    def __init__(self, blogid, datecreated, title, description):
+        self.blogid = blogid
+        self.datecreated = datecreated
+        self.title = title
+        self.description = description
