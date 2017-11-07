@@ -19,18 +19,16 @@ def index():
         cached = 'false'
         rows = get_blogs()
         for i in rows:
-            data.append(
-                Blog(
-                    blogid=i['BlogID'],
-                    datecreated=i['DateCreated'],
-                    title=i['Title'],
-                    description=i['Description'],
-                    content=i['Content'],
-                    contenttype=i['ContentType'],
-                    author=i['Author'],
-                    tags=i['Tags']
-                )
-            )
+            blog = Blog()
+            blog.blogid = i['BlogID']
+            blog.datecreated = i['DateCreated']
+            blog.title = i['Title']
+            blog.description = i['Description']
+            blog.content = i['Content']
+            blog.contenttype = i['ContentType']
+            blog.author = i['Author']
+            blog.tags = i['Tags']
+            data.append(blog)
         CACHE.set('blogs', data, timeout=5*10)
     else:
         cached = 'true'

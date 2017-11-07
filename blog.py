@@ -21,8 +21,5 @@ class Blog(object):  # pylint: disable=too-few-public-methods
     author = ""
     tags = ""
 
-    def __init__(self, blogid, datecreated, title, description):
-        self.blogid = blogid
-        self.datecreated = datecreated
-        self.title = title
-        self.description = description
+    def __init__(self):
+        self = self
