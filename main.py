@@ -31,7 +31,7 @@ def index():
             blog.authorsite = i['AuthorSite']
             blog.tags = i['Tags']
             if blog.contenttype == 'MARKDOWN':
-                blog.content = markdown2.markdown(i['Content'])
+                blog.content = markdown2.markdown(blog.content)
             data.append(blog)
         CACHE.set('blogs', data, timeout=5*60)
     else:
