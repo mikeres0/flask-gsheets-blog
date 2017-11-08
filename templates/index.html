@@ -36,7 +36,7 @@
                   {{ blog.description }}
               </h3>
               <p>
-                  {{ blog.content|safe if blog.contenttype == 'HTML' else blog.content  }}
+                  {{ blog.content|safe }}
               </p>
               <p class="post-meta">Posted by
                 <a href="{{ blog.authorsite }}" target="_blank">{{ blog.author }}</a> on {{ blog.datecreated }}

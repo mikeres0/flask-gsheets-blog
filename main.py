@@ -2,6 +2,7 @@
 from flask import Flask, render_template, redirect
 from blog import Blog, get_blogs
 from werkzeug.contrib.cache import SimpleCache
+import markdown2
 
 APP = Flask(__name__)
 APP.secret_key = "dfoadhfoiawert834trjwernhfgp9werytawj"
@@ -11,7 +12,7 @@ CACHE = SimpleCache()
 @APP.route('/')
 def index():
     """ the index view or blog list page """
-    blogs = None#CACHE.get('blogs')
+    blogs = CACHE.get('blogs')
     data = []
     cached = ''
 
@@ -29,6 +30,8 @@ def index():
             blog.author = i['Author']
             blog.authorsite = i['AuthorSite']
             blog.tags = i['Tags']
+            if blog.contenttype == 'MARKDOWN':
+                blog.content = markdown2.markdown(i['Content'])
             data.append(blog)
         CACHE.set('blogs', data, timeout=5*60)
     else:
