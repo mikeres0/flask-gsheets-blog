@@ -30,7 +30,7 @@ def index():
             blog.authorsite = i['AuthorSite']
             blog.tags = i['Tags']
             data.append(blog)
-        CACHE.set('blogs', data, timeout=5*10)
+        CACHE.set('blogs', data, timeout=5*60)
     else:
         cached = 'true'
         data = blogs
