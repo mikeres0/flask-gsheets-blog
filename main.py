@@ -11,7 +11,7 @@ CACHE = SimpleCache()
 @APP.route('/')
 def index():
     """ the index view or blog list page """
-    blogs = CACHE.get('blogs')
+    blogs = None#CACHE.get('blogs')
     data = []
     cached = ''
 

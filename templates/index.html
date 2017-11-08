@@ -31,10 +31,10 @@
                 <h2 class="post-title">
                   {{ blog.title }}
                 </h2>
-                <h3 class="post-subtitle">
-                    {{ blog.description }}
-                </h3>
               </a>
+              <h3 class="post-subtitle">
+                  {{ blog.description }}
+              </h3>
               <p>
                   {{ blog.content|safe if blog.contenttype == 'HTML' else blog.content  }}
               </p>
@@ -57,6 +57,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   {% block extrajs %}{% endblock %}
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+    p {
+      margin: 20px 0 20px 0;
+    }
+  </style>
 </body>
 
 </html>
