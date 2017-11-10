@@ -40,8 +40,8 @@ def get_blogs_with_category_id(categoryid):
             _wks = _gc.open("BlogDB").worksheet_by_title("CategoryMatrix")
             _rows = _wks.get_all_records('', 1)
             for i in filter(lambda x: x['CategoryID'] == categoryid, _rows):
-                blogid = i['BlogID']
-                data.append(next(filter(lambda x: x.blogid == blogid, blogs)))
+                blog_id = i['BlogID']
+                data.append(next(filter(lambda x: x.blogid == blog_id, blogs)))
         CACHE.set('category-' + str(categoryid), data)
         return data
     else:
@@ -118,7 +118,7 @@ class Category(object):  # pylint: disable=too-few-public-methods
 
     def __init__(self):
         self = self
-          
+
 
 class Breadcrumb(object):  # pylint: disable=too-few-public-methods
     """ class object for breadcrumbs """
