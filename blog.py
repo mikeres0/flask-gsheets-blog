@@ -21,6 +21,7 @@ def get_blogs():
             blog.content = i['Content']
             blog.contenttype = i['ContentType']
             blog.author = i['Author']
+            blog.authorsite = i['AuthorSite']
             blog.tags = i['Tags']
             data.append(blog)
         CACHE.set('blogs', data)
