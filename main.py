@@ -46,7 +46,6 @@ def category_index(url):
                            breadcrumbs=breadcrumbs,
                            activenav='category')
 
-
 @APP.route('/clear-cache')
 def clearcache():
     """ clears blogs cache object """

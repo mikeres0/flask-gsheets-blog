@@ -88,7 +88,6 @@ def clear_cache():
     CACHE.set('blogs', None, 1)
     CACHE.set('categories', None, 1)
     CACHE.set('categorymatrix', None, 1)
-    
 
 
 class Blog(object):  # pylint: disable=too-few-public-methods
