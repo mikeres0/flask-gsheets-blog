@@ -4,6 +4,20 @@
             <li class="{{ 'active' if activenav == 'home' else '' }}">
                 <a href="/">Home</a>
             </li>
+            {% if categories %}
+            <li class="{{ 'active' if activenav == 'category' else '' }} dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Categories
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for category in categories %}
+                    <li>
+                        <a href="/category/{{ category.url }}">{{ category.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

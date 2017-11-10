@@ -12,7 +12,10 @@ CACHE = SimpleCache()
 @APP.route('/')
 def index():
     """ the index view for blog list page """
-    return render_template('home/index.html', blogs=blog.get_blogs(), activenav='home')
+    return render_template('home/index.html',
+                            blogs=blog.get_blogs(),
+                            categories=blog.get_categories(),
+                            activenav='home')
 
 @APP.route('/post/<url>')
 def post_index(url):
@@ -20,7 +23,24 @@ def post_index(url):
     post = blog.get_blog(url)
     breadcrumbs = []
     breadcrumbs.append(blog.Breadcrumb(title=post.title, url='/post/{0}'.format(post.url)))
-    return render_template('post/index.html', blog=post, breadcrumbs=breadcrumbs)
+    return render_template('post/index.html',
+                            blog=post,
+                            categories=blog.get_categories(),
+                            breadcrumbs=breadcrumbs)
+
+@APP.route('/category/<url>')
+def category_index(url):
+    """ the index view for post page """
+    category = blog.get_category(url)
+    blogs = blog.get_blogs_with_category_id(category.categoryid)
+    breadcrumbs = []
+    breadcrumbs.append(blog.Breadcrumb(title=category.title, url='/category/{0}'.format(category.url)))
+    return render_template('category/index.html',
+                            blogs=blogs,
+                            category=category,
+                            categories=blog.get_categories(),
+                            breadcrumbs=breadcrumbs,
+                            activenav='category')
 
 
 @APP.route('/clear-cache')

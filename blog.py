@@ -23,10 +23,29 @@ def get_blogs():
             blog.author = i['Author']
             blog.tags = i['Tags']
             data.append(blog)
-        CACHE.set('blogs', data, timeout=5*60)
+        CACHE.set('blogs', data)
         return data
     else:
         return blogs
+
+def get_blogs_with_category_id(categoryid):
+    """ return rows object containing blogs for a specific category """
+    cached_blogs = CACHE.get('category-' + str(categoryid))
+    if cached_blogs is None:
+        blogs = get_blogs()
+        categorymatrix = CACHE.get('categorymatrix')
+        data = []
+        if categorymatrix is None:
+            _gc = pygsheets.authorize(service_file='client_secret.json', no_cache=True)
+            _wks = _gc.open("BlogDB").worksheet_by_title("CategoryMatrix")
+            _rows = _wks.get_all_records('', 1)
+            for i in filter(lambda x: x['CategoryID'] == categoryid, _rows):
+                blogid = i['BlogID']
+                data.append(next(filter(lambda x: x.blogid == blogid, blogs)))
+        CACHE.set('category-' + str(categoryid), data)
+        return data
+    else:
+        return cached_blogs
 
 
 def get_blog(url):
@@ -40,6 +59,35 @@ def get_blog(url):
         blog = next(filter(lambda x: x.url == url, blogs))
         return blog
 
+def get_categories():
+    """ return rows object containing categories """
+    categories = CACHE.get('categories')
+    data = []
+    if categories is None:
+        _gc = pygsheets.authorize(service_file='client_secret.json', no_cache=True)
+        _wks = _gc.open("BlogDB").worksheet_by_title("Categories")
+        _rows = _wks.get_all_records('', 1)
+        for i in _rows:
+            category = Category()
+            category.categoryid = i['CategoryID']
+            category.title = i['Title']
+            category.url = i['URL']
+            data.append(category)
+        CACHE.set('categories', data)
+        return data
+    else:
+        return categories
+
+def get_category(url):
+    """ return rows object containing a category """
+    categories = CACHE.get('categories')
+    if categories is None:
+        data = get_categories()
+        category = next(filter(lambda x: x.url == url, data))
+        return category
+    else:
+        category = next(filter(lambda x: x.url == url, categories))
+        return category    
 
 def clear_cache():
     """ clears cache objects """
@@ -61,6 +109,16 @@ class Blog(object):  # pylint: disable=too-few-public-methods
 
     def __init__(self):
         self = self
+
+class Category(object):  # pylint: disable=too-few-public-methods
+    """ class object for category """
+    categoryid =  -1
+    title = ""
+    url = ""
+
+    def __init__(self):
+        self = self
+          
 
 class Breadcrumb(object):  # pylint: disable=too-few-public-methods
     """ class object for breadcrumbs """

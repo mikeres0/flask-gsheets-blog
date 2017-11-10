@@ -16,8 +16,10 @@
 
 <body>
   <div class="container">
-    <!-- {% include 'shared/_nav.html' %} -->
-
+    {% with categories=categories %}
+    {% include 'shared/_nav.html' %}
+    {% endwith %}
+    
     {% with breadcrumbs=breadcrumbs %}
     {% include 'shared/_breadcrumbs.html' %}
     {% endwith %}

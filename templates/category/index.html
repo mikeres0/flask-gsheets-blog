@@ -1,0 +1,32 @@
+{% extends 'shared/base.html' %}
+{% block title %}{{ category.title }}{% endblock %}
+{% block pagetitle %}{{ category.title }}{% endblock %}
+{% block content %}
+{% if blogs %}
+{% for blog in blogs %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        <a href="/post/{{ blog.url }}">
+          <h2 class="post-title">
+            {{ blog.title }}
+          </h2>
+        </a>
+        <h3 class="post-subtitle">
+            {{ blog.description }}
+        </h3>
+        <p>
+            {{ blog.content|safe }}
+        </p>
+        <p class="post-meta">Posted by
+          <a href="{{ blog.authorsite }}" target="_blank">{{ blog.author }}</a> on {{ blog.datecreated }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+{% endfor %}
+{% else %}
+{% include 'shared/_no-results.html' %}
+{% endif %}
+{% endblock %}
