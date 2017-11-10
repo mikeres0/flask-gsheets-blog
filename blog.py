@@ -28,6 +28,7 @@ def get_blogs():
         return blogs
 
 def clear_cache():
+    """ clears cache objects """
     CACHE.set('blogs', None, 1)
 
 
