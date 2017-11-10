@@ -8,7 +8,7 @@
   <meta name="description" content="GSHEETS + FLASK = BLOG <3">
   <meta name="author" content="Mike Resoli">
 
-  <title>GSHEETS #⃣ + FLASK 🍼 = BLOG 😍</title>
+  <title>GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 - {% block pagetitle %}{% endblock%}</title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -17,36 +17,12 @@
 <body>
   <div class="container">
     <h1>
-      GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 
+      GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 - {% block title %}{% endblock%}
       <br />
       <small> Cached: {{ cached }}</small>
     </h1>
 
-    {% if blogs %}
-      {% for blog in blogs %}
-      <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="post-preview">
-              <a href="#">
-                <h2 class="post-title">
-                  {{ blog.title }}
-                </h2>
-              </a>
-              <h3 class="post-subtitle">
-                  {{ blog.description }}
-              </h3>
-              <p>
-                  {{ blog.content|safe }}
-              </p>
-              <p class="post-meta">Posted by
-                <a href="{{ blog.authorsite }}" target="_blank">{{ blog.author }}</a> on {{ blog.datecreated }}
-              </p>
-            </div>
-          </div>
-        </div>
-        <hr>
-      {% endfor %}
-    {% endif %}
+    {% block content %}{% endblock %}
   </div>
   <!-- Core JavaScript
     ================================================== -->

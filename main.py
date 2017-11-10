@@ -38,7 +38,7 @@ def index():
         cached = 'true'
         data = blogs
 
-    return render_template('index.html', blogs=data, cached=cached)
+    return render_template('home/index.html', blogs=data, cached=cached)
 
 
 @APP.route('/clear-cache')
