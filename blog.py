@@ -40,7 +40,10 @@ def get_blogs_with_category_id(categoryid):
             _wks = _gc.open("BlogDB").worksheet_by_title("CategoryMatrix")
             _rows = _wks.get_all_records('', 1)
             for i in filter(lambda x: x['CategoryID'] == categoryid, _rows):
-                data.append(next(filter(lambda x: x.blogid == i['BlogID'], blogs)))
+                try:
+                    data.append(next(filter(lambda x: x.blogid == i['BlogID'], blogs)))
+                except StopIteration:
+                    pass
         CACHE.set('category-' + str(categoryid), data)
         return data
     return cached_blogs
