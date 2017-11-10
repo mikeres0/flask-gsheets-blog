@@ -12,14 +12,12 @@
             {{ blog.title }}
           </h2>
         </a>
-        <h3 class="post-subtitle">
-            {{ blog.description }}
-        </h3>
         <p>
-            {{ blog.content|safe }}
+            {{ blog.content|truncate(400)|safe }}... 
         </p>
-        <p class="post-meta">Posted by
-          <a href="{{ blog.authorsite }}" target="_blank">{{ blog.author }}</a> on {{ blog.datecreated }}
+        
+        <p class="post-readmore">
+          <a href="/post/{{ blog.url }}">Read more</a>
         </p>
       </div>
     </div>

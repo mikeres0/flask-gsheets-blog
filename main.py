@@ -18,7 +18,7 @@ def index():
 
 @APP.route('/post/<url>')
 def post_index(url):
-    """ the index view for post page """
+    """ the index view for post page """       
     post = blog.get_blog(url)
     breadcrumbs = []
     breadcrumbs.append(blog.Breadcrumb(title=post.title, url='/post/{0}'.format(post.url)))
@@ -29,7 +29,7 @@ def post_index(url):
 
 @APP.route('/category/<url>')
 def category_index(url):
-    """ the index view for post page """
+    """ the index view for category page """
     category = blog.get_category(url)
     blogs = blog.get_blogs_with_category_id(category.categoryid)
     breadcrumbs = []

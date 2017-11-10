@@ -25,7 +25,7 @@
     {% endwith %}
     
     <h1>
-      GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 - {% block title %}{% endblock%}
+      {% block title %}{% endblock%}
     </h1>
 
     {% block content %}{% endblock %}
@@ -45,6 +45,11 @@
     }
     .breadcrumb {
       margin: 20px 0 20px 0;
+    }
+    .post-readmore {
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
     }
   </style>
 </body>

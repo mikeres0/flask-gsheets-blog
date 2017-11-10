@@ -25,8 +25,7 @@ def get_blogs():
             data.append(blog)
         CACHE.set('blogs', data)
         return data
-    else:
-        return blogs
+    return blogs
 
 def get_blogs_with_category_id(categoryid):
     """ return rows object containing blogs for a specific category """
@@ -40,12 +39,10 @@ def get_blogs_with_category_id(categoryid):
             _wks = _gc.open("BlogDB").worksheet_by_title("CategoryMatrix")
             _rows = _wks.get_all_records('', 1)
             for i in filter(lambda x: x['CategoryID'] == categoryid, _rows):
-                blog_id = i['BlogID']
-                data.append(next(filter(lambda x: x.blogid == blog_id, blogs)))
+                data.append(next(filter(lambda x: x.blogid == i['BlogID'], blogs)))
         CACHE.set('category-' + str(categoryid), data)
         return data
-    else:
-        return cached_blogs
+    return cached_blogs
 
 
 def get_blog(url):
@@ -55,9 +52,8 @@ def get_blog(url):
         data = get_blogs()
         blog = next(filter(lambda x: x.url == url, data))
         return blog
-    else:
-        blog = next(filter(lambda x: x.url == url, blogs))
-        return blog
+    blog = next(filter(lambda x: x.url == url, blogs))
+    return blog
 
 def get_categories():
     """ return rows object containing categories """
@@ -75,8 +71,7 @@ def get_categories():
             data.append(category)
         CACHE.set('categories', data)
         return data
-    else:
-        return categories
+    return categories
 
 def get_category(url):
     """ return rows object containing a category """
@@ -85,13 +80,15 @@ def get_category(url):
         data = get_categories()
         category = next(filter(lambda x: x.url == url, data))
         return category
-    else:
-        category = next(filter(lambda x: x.url == url, categories))
-        return category    
+    category = next(filter(lambda x: x.url == url, categories))
+    return category
 
 def clear_cache():
     """ clears cache objects """
     CACHE.set('blogs', None, 1)
+    CACHE.set('categories', None, 1)
+    CACHE.set('categorymatrix', None, 1)
+    
 
 
 class Blog(object):  # pylint: disable=too-few-public-methods
@@ -112,7 +109,7 @@ class Blog(object):  # pylint: disable=too-few-public-methods
 
 class Category(object):  # pylint: disable=too-few-public-methods
     """ class object for category """
-    categoryid =  -1
+    categoryid = -1
     title = ""
     url = ""
 
