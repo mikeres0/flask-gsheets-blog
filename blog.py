@@ -14,6 +14,7 @@ def get_blogs():
         for i in _rows:
             blog = Blog()
             blog.blogid = i['BlogID']
+            blog.url = i['URL']
             blog.datecreated = i['DateCreated']
             blog.title = i['Title']
             blog.description = i['Description']
@@ -27,6 +28,19 @@ def get_blogs():
     else:
         return blogs
 
+
+def get_blog(url):
+    """ return rows object containing blogs """
+    blogs = CACHE.get('blogs')
+    if blogs is None:
+        data = get_blogs()
+        blog = next(filter(lambda x: x.url == url, data))
+        return blog
+    else:
+        blog = next(filter(lambda x: x.url == url, blogs))
+        return blog
+
+
 def clear_cache():
     """ clears cache objects """
     CACHE.set('blogs', None, 1)
@@ -36,6 +50,7 @@ class Blog(object):  # pylint: disable=too-few-public-methods
     """ class object for blog """
     blogid = -1
     datecreated = ""
+    url = ""
     title = ""
     description = ""
     content = ""
@@ -45,4 +60,14 @@ class Blog(object):  # pylint: disable=too-few-public-methods
     tags = ""
 
     def __init__(self):
+        self = self
+
+class Breadcrumb(object):  # pylint: disable=too-few-public-methods
+    """ class object for breadcrumbs """
+    url = ""
+    title = ""
+
+    def __init__(self, url, title):
+        self.title = title
+        self.url = url
         self = self

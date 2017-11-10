@@ -1,0 +1,12 @@
+<ul class="breadcrumb">
+    <li>
+        <a href="/">Home</a>
+    </li>
+    {% if breadcrumbs %}
+    {% for breadcrumb in breadcrumbs %}
+    <li>
+        <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
+    </li>
+    {% endfor %}
+    {% endif %}
+</ul>

@@ -16,6 +16,12 @@
 
 <body>
   <div class="container">
+    <!-- {% include 'shared/_nav.html' %} -->
+
+    {% with breadcrumbs=breadcrumbs %}
+    {% include 'shared/_breadcrumbs.html' %}
+    {% endwith %}
+    
     <h1>
       GSHEETS #⃣ + FLASK 🍼 = BLOG 😍 - {% block title %}{% endblock%}
     </h1>
@@ -25,9 +31,6 @@
   <!-- Core JavaScript
     ================================================== -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
-  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   {% block extrajs %}{% endblock %}
@@ -36,6 +39,9 @@
       white-space: pre-wrap;
     }
     p {
+      margin: 20px 0 20px 0;
+    }
+    .breadcrumb {
       margin: 20px 0 20px 0;
     }
   </style>

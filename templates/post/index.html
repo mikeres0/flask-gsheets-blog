@@ -1,13 +1,12 @@
 {% extends 'shared/base.html' %}
-{% block title %}Home{% endblock %}
-{% block pagetitle %}Home{% endblock %}
+{% block title %}{{blog.title}}{% endblock %}
+{% block pagetitle %}{{blog.title}}{% endblock %}
 {% block content %}
-{% if blogs %}
-{% for blog in blogs %}
+{% if blog %}
 <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
       <div class="post-preview">
-        <a href="/post/{{ blog.url }}">
+        <a href="#">
           <h2 class="post-title">
             {{ blog.title }}
           </h2>
@@ -25,8 +24,5 @@
     </div>
   </div>
   <hr>
-{% endfor %}
-{% else %}
-{% include 'shared/_no-results.html' %}
-{% endif %}
+  {% endif %}
 {% endblock %}
