@@ -98,8 +98,10 @@ def clear_cache():
     CACHE.set('categorymatrix', None, 1)
 
 
-class Blog(object):  # pylint: disable=too-few-public-methods
+class Blog(object):
     """ class object for blog """
+    # pylint: disable=too-few-public-methods
+    # pylint: disable=too-many-instance-attributes
     blogid = -1
     datecreated = ""
     url = ""
@@ -114,8 +116,9 @@ class Blog(object):  # pylint: disable=too-few-public-methods
     def __init__(self):
         self = self
 
-class Category(object):  # pylint: disable=too-few-public-methods
+class Category(object):
     """ class object for category """
+    # pylint: disable=too-few-public-methods
     categoryid = -1
     title = ""
     url = ""
@@ -124,8 +127,9 @@ class Category(object):  # pylint: disable=too-few-public-methods
         self = self
 
 
-class Breadcrumb(object):  # pylint: disable=too-few-public-methods
-    """ class object for breadcrumbs """
+class Breadcrumb(object):
+    """ class object for breadcrumbs """#
+    # pylint: disable=too-few-public-methods
     url = ""
     title = ""
 
