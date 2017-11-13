@@ -89,6 +89,10 @@ def get_category(url):
 
 def clear_cache():
     """ clears cache objects """
+    categories = get_categories()
+    if categories != None:
+        for cat in categories:
+            CACHE.set('category-' + str(cat.categoryid), None, 1)
     CACHE.set('blogs', None, 1)
     CACHE.set('categories', None, 1)
     CACHE.set('categorymatrix', None, 1)
