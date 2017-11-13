@@ -1,6 +1,7 @@
 """ file for interacting with blog objects """
 import pygsheets
 from werkzeug.contrib.cache import SimpleCache
+import markdown2
 CACHE = SimpleCache()
 
 def get_blogs():
@@ -23,6 +24,8 @@ def get_blogs():
             blog.author = i['Author']
             blog.authorsite = i['AuthorSite']
             blog.tags = i['Tags']
+            if blog.contenttype == "MARKDOWN":
+                blog.content = markdown2.markdown(blog.content)
             data.append(blog)
         CACHE.set('blogs', data)
         return data
